@@ -14,10 +14,10 @@ class PaymentsApiTest extends ApiTestCase
         $gateway = $this->getGateway();
 
         Payment::query()->create([
-            'order_id'   => $order->id,
+            'order_id' => $order->id,
             'gateway_id' => $gateway->id,
-            'status'     => PaymentStatus::Successful,
-            'amount'     => 10,
+            'status' => PaymentStatus::Successful,
+            'amount' => 10,
         ]);
 
         $res = $this->getAuth('/api/payments');
@@ -30,10 +30,10 @@ class PaymentsApiTest extends ApiTestCase
         $gateway = $this->getGateway();
 
         $payment = Payment::query()->create([
-            'order_id'   => $order->id,
+            'order_id' => $order->id,
             'gateway_id' => $gateway->id,
-            'status'     => PaymentStatus::Successful,
-            'amount'     => 10,
+            'status' => PaymentStatus::Successful,
+            'amount' => 10,
         ]);
 
         $res = $this->getAuth("/api/payments/{$payment->id}");
@@ -42,7 +42,7 @@ class PaymentsApiTest extends ApiTestCase
 
     public function test_show_payment_not_found(): void
     {
-        $res = $this->getAuth("/api/payments/999999");
+        $res = $this->getAuth('/api/payments/999999');
         $res->assertStatus(Response::HTTP_NOT_FOUND);
     }
 
@@ -52,10 +52,10 @@ class PaymentsApiTest extends ApiTestCase
         $gateway = $this->getGateway();
 
         Payment::query()->create([
-            'order_id'   => $order->id,
+            'order_id' => $order->id,
             'gateway_id' => $gateway->id,
-            'status'     => PaymentStatus::Successful,
-            'amount'     => 10,
+            'status' => PaymentStatus::Successful,
+            'amount' => 10,
         ]);
 
         $res = $this->getAuth("/api/payments/order/{$order->id}");
@@ -64,8 +64,7 @@ class PaymentsApiTest extends ApiTestCase
 
     public function test_get_payments_by_order_not_found(): void
     {
-        $res = $this->getAuth("/api/payments/order/999999");
+        $res = $this->getAuth('/api/payments/order/999999');
         $res->assertStatus(Response::HTTP_NOT_FOUND);
     }
-
 }

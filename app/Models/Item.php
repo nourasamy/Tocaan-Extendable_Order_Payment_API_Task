@@ -21,6 +21,5 @@ class Item extends Model
     public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class);
-    }   
-
+    }
 }

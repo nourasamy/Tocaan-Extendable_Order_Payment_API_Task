@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class GatewayRequest extends FormRequest
 {
@@ -23,14 +24,17 @@ class GatewayRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'handler_key' => 'required|string|unique:payment_gateways,handler_key' . ($this->method() === 'PUT' ? ',' . $this->route('gateway') : ''),
+            'handler_key' => [
+                'required',
+                'string',
+                Rule::unique('payment_gateways', 'handler_key')->ignore($this->route('gateway')),
+            ],
             'handler_class' => 'required|string',
             'active' => 'sometimes|boolean',
             'client_id' => 'nullable|string|max:255',
             'secret_key' => 'nullable|string|max:255',
         ];
     }
-
 
     public function messages(): array
     {

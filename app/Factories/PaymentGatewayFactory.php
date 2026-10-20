@@ -16,11 +16,11 @@ class PaymentGatewayFactory
 
         $handlerClass = $gateway?->handler_class;
 
-        if (!class_exists($handlerClass) || !is_a($handlerClass, PaymentGatewayInterface::class, true)) {
+        if (! class_exists($handlerClass) || ! is_a($handlerClass, PaymentGatewayInterface::class, true)) {
             throw new Exception('Payment gateway handler must implement PaymentGatewayInterface.');
         }
 
-        return new $handlerClass();
+        return new $handlerClass;
 
     }
 }

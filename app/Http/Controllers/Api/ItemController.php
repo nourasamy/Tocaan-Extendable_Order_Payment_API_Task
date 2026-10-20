@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ItemRequest;
 use App\Http\Resources\ItemResource;
 use App\Repositories\ItemRepository;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class ItemController extends Controller
@@ -18,63 +19,66 @@ class ItemController extends Controller
         $this->itemRepository = $itemRepository;
     }
 
-    public function index()
+    public function index(): JsonResponse
     {
         try {
             $items = $this->itemRepository->paginate(15);
+
             return ResponseHelper::JsonWithPagination($items, ItemResource::collection($items), 'Data retrieved successfully');
-        } catch (\Exception $e) {
-            return ResponseHelper::JsonWithError($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        } catch (\Throwable $exception) {
+            return $this->serverError($exception, 'Unable to retrieve items.');
         }
     }
 
-    public function store(ItemRequest $request)
+    public function store(ItemRequest $request): JsonResponse
     {
         try {
 
             $item = $this->itemRepository->create($request->validated());
+
             return ResponseHelper::jsonWithSuccess(new ItemResource($item), 'Item created successfully', Response::HTTP_CREATED);
-        } catch (\Exception $e) {
-            return ResponseHelper::JsonWithError($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        } catch (\Throwable $exception) {
+            return $this->serverError($exception, 'Unable to create item.');
         }
     }
 
-    public function show($id)
+    public function show(int|string $id): JsonResponse
     {
         try {
             $item = $this->itemRepository->findById($id);
 
-            if (!$item) {
+            if (! $item) {
                 return ResponseHelper::JsonWithError('Item not found', Response::HTTP_NOT_FOUND);
             }
 
             return ResponseHelper::jsonWithSuccess(new ItemResource($item), 'Item retrieved successfully', Response::HTTP_OK);
-        } catch (\Exception $e) {
-            return ResponseHelper::JsonWithError($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        } catch (\Throwable $exception) {
+            return $this->serverError($exception, 'Unable to retrieve item.');
         }
     }
 
-    public function update(ItemRequest $request, $id)
+    public function update(ItemRequest $request, int|string $id): JsonResponse
     {
         try {
-            if (!$this->itemRepository->findById($id)) {
+            if (! $this->itemRepository->findById($id)) {
                 return ResponseHelper::JsonWithError('Item not found', Response::HTTP_NOT_FOUND);
             }
 
             $item = $this->itemRepository->update($id, $request->validated());
+
             return ResponseHelper::jsonWithSuccess(new ItemResource($item), 'Item updated successfully', Response::HTTP_OK);
-        } catch (\Exception $e) {
-            return ResponseHelper::JsonWithError($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        } catch (\Throwable $exception) {
+            return $this->serverError($exception, 'Unable to update item.');
         }
     }
 
-    public function destroy($id)
+    public function destroy(int|string $id): JsonResponse
     {
         try {
 
             $item = $this->itemRepository->findById($id);
 
-            if (!$item) {
+            if (! $item) {
                 return ResponseHelper::JsonWithError('Item not found', Response::HTTP_NOT_FOUND);
             }
 
@@ -85,9 +89,8 @@ class ItemController extends Controller
             $this->itemRepository->delete($id);
 
             return ResponseHelper::jsonWithSuccess(null, 'Item deleted successfully', Response::HTTP_OK);
-        } catch (\Exception $e) {
-
-            return ResponseHelper::JsonWithError($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        } catch (\Throwable $exception) {
+            return $this->serverError($exception, 'Unable to delete item.');
         }
     }
 }

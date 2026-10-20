@@ -8,7 +8,7 @@ class ItemRepositoryTest extends ApiUnitTestCase
 {
     public function test_create_item(): void
     {
-        $repo = new ItemRepository();
+        $repo = new ItemRepository;
 
         $item = $repo->create([
             'name' => 'Item A',
@@ -21,7 +21,7 @@ class ItemRepositoryTest extends ApiUnitTestCase
 
     public function test_find_item_by_id(): void
     {
-        $repo = new ItemRepository();
+        $repo = new ItemRepository;
 
         $item = $repo->create([
             'name' => 'Item B',
@@ -35,7 +35,7 @@ class ItemRepositoryTest extends ApiUnitTestCase
 
     public function test_update_item(): void
     {
-        $repo = new ItemRepository();
+        $repo = new ItemRepository;
 
         $item = $repo->create([
             'name' => 'Item C',
@@ -53,7 +53,7 @@ class ItemRepositoryTest extends ApiUnitTestCase
 
     public function test_delete_item(): void
     {
-        $repo = new ItemRepository();
+        $repo = new ItemRepository;
 
         $item = $repo->create([
             'name' => 'Item D',

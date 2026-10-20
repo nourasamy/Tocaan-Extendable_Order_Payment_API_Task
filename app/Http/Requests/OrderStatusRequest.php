@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Enums\OrderStatus;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class OrderStatusRequest extends FormRequest
@@ -32,7 +32,7 @@ class OrderStatusRequest extends FormRequest
     {
         return [
             'status.required' => 'Order status is required.',
-            'status.enum'     => 'Invalid order status.',
+            'status.enum' => 'Invalid order status.',
         ];
     }
 }

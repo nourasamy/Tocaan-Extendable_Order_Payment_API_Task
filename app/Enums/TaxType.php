@@ -9,7 +9,7 @@ enum TaxType: int
 
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             self::Fixed => 'Fixed',
             self::Percent => 'Percent',
         };

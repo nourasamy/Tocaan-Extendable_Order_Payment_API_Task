@@ -5,13 +5,16 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PaymentResource;
-use App\Repositories\PaymentRepository;
 use App\Repositories\OrderRepository;
+use App\Repositories\PaymentRepository;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class PaymentController extends Controller
 {
     protected PaymentRepository $paymentRepository;
+
     protected OrderRepository $orderRepository;
 
     public function __construct(PaymentRepository $paymentRepository, OrderRepository $orderRepository)
@@ -20,49 +23,52 @@ class PaymentController extends Controller
         $this->orderRepository = $orderRepository;
     }
 
-    public function index()
+    public function index(Request $request): JsonResponse
     {
-        try{
+        try {
+            $payments = $this->paymentRepository->paginate(
+                orderId: $request->integer('order_id') ?: null
+            );
 
-            $payments = $this->paymentRepository->paginate();
             return ResponseHelper::jsonWithSuccess(PaymentResource::collection($payments), 'Payments retrieved successfully', Response::HTTP_OK);
 
-        }catch (\Exception $e){
-            return ResponseHelper::JsonWithError($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        } catch (\Throwable $exception) {
+            return $this->serverError($exception, 'Unable to retrieve payments.');
 
         }
     }
 
-    public function show($id)
+    public function show(int|string $id): JsonResponse
     {
-        try{
+        try {
 
             $payment = $this->paymentRepository->findById($id);
-            if(!$payment){
+            if (! $payment) {
                 return ResponseHelper::JsonWithError('Payment not found', Response::HTTP_NOT_FOUND);
             }
+
             return ResponseHelper::jsonWithSuccess(new PaymentResource($payment), 'Payment retrieved successfully', Response::HTTP_OK);
 
-        }catch (\Exception $e){
-            return ResponseHelper::JsonWithError($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        } catch (\Throwable $exception) {
+            return $this->serverError($exception, 'Unable to retrieve payment.');
 
         }
     }
 
-    public function getPaymentsByOrder($orderId)
+    public function getPaymentsByOrder(int|string $orderId): JsonResponse
     {
-        try{
+        try {
             $order = $this->orderRepository->findById($orderId);
-            if(!$order){
+            if (! $order) {
                 return ResponseHelper::JsonWithError('Order not found', Response::HTTP_NOT_FOUND);
             }
             $payments = $this->paymentRepository->getByOrders($orderId);
+
             return ResponseHelper::JsonWithPagination($payments, PaymentResource::collection($payments), 'Payments for order retrieved successfully');
 
-        }catch (\Exception $e){
-            return ResponseHelper::JsonWithError($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        } catch (\Throwable $exception) {
+            return $this->serverError($exception, 'Unable to retrieve order payments.');
 
         }
     }
-
 }

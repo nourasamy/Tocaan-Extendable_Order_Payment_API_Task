@@ -4,22 +4,27 @@ namespace App\Repositories;
 
 use App\Models\Payment;
 use App\Services\PaymentService;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
+
 class PaymentRepository
 {
+    public function __construct(private readonly PaymentService $paymentService) {}
 
     public function all()
     {
         return Payment::all();
     }
 
-    public function paginate($perPage = 15)
+    public function paginate(int $perPage = 15, ?int $orderId = null): LengthAwarePaginator
     {
-        $payments = Payment::query();
-        if(request()->has('order_id')){
-            $payments = $payments->order(request()->get('order_id'));
+        $payments = Payment::query()->with('order', 'gateway');
+
+        if ($orderId !== null) {
+            $payments->order($orderId);
         }
-        return $payments->with('order', 'gateway')->paginate($perPage);
+
+        return $payments->paginate($perPage);
     }
 
     public function findById($id)
@@ -27,22 +32,14 @@ class PaymentRepository
         return Payment::with('order', 'gateway')->find($id);
     }
 
-    public function create(array $data)
+    public function create(array $data): Payment
     {
-       try {
-            DB::beginTransaction();
+        return DB::transaction(function () use ($data): Payment {
             $payment = Payment::create($data);
-            DB::commit();
 
-            $paymentProcess = (new PaymentService())->makePayment($payment);
-
-            return $paymentProcess;
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return null;
-        }
+            return $this->paymentService->makePayment($payment);
+        });
     }
-
 
     public function getByOrders($orderId, $perPage = 15)
     {
@@ -50,5 +47,4 @@ class PaymentRepository
             ->with('order', 'gateway')
             ->paginate($perPage);
     }
-
 }

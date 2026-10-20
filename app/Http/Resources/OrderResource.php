@@ -26,7 +26,7 @@ class OrderResource extends JsonResource
             'discount_type' => $this->discount_type,
             'grand_total' => number_format($this->grand_total, 2, '.', ''),
             'order_details' => OrderDetailsResource::collection($this->whenLoaded('orderDetails')),
-            'payments' => $this->whenLoaded('payments') ? PaymentResource::collection($this->payments) : null,
+            'payments' => PaymentResource::collection($this->whenLoaded('payments')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

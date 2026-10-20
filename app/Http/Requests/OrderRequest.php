@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\DiscountType;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Validator;
 
 class OrderRequest extends FormRequest
 {
@@ -51,7 +53,25 @@ class OrderRequest extends FormRequest
             'tax.numeric' => 'Tax must be numeric.',
             'tax_type.in' => 'Tax type must be 1 (fixed) or 2 (percent).',
             'discount.numeric' => 'Discount must be numeric.',
-            'discount_type.in' => 'Discount type must be 1 (fixed) or 2 (percent).'
+            'discount_type.in' => 'Discount type must be 1 (fixed) or 2 (percent).',
         ];
+    }
+
+    /**
+     * Add validation for percentage-based discounts.
+     */
+    public function withValidator(Validator $validator): void
+    {
+        $validator->after(function (Validator $validator): void {
+            if (
+                (int) $this->input('discount_type') === DiscountType::Percent->value
+                && (float) $this->input('discount', 0) > 100
+            ) {
+                $validator->errors()->add(
+                    'discount',
+                    'Percentage discount cannot be greater than 100.'
+                );
+            }
+        });
     }
 }

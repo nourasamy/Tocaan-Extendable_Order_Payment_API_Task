@@ -34,7 +34,6 @@ class ClientRequest extends FormRequest
         ];
     }
 
-
     public function messages(): array
     {
         return [

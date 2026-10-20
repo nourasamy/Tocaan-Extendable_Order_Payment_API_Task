@@ -7,6 +7,7 @@ use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
 use App\Enums\TaxType;
 use App\Models\Payment;
+use App\Services\PaymentService;
 use Mockery;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -25,19 +26,19 @@ class OrdersApiTest extends ApiTestCase
         $client = $this->makeClient();
         $this->makeOrder(['client_id' => $client->id, 'status' => OrderStatus::Pending]);
 
-        $res = $this->getAuth('/api/orders?client_id=' . $client->id . '&status=' . OrderStatus::Pending->value);
+        $res = $this->getAuth('/api/orders?client_id='.$client->id.'&status='.OrderStatus::Pending->value);
         $res->assertStatus(Response::HTTP_OK);
     }
 
     public function test_store_order_validation_error(): void
     {
         $res = $this->postAuth('/api/orders', [
-            'client_id'     => '',
-            'tax'           => -5,
-            'tax_type'      => '',
-            'discount'      => -10,
+            'client_id' => '',
+            'tax' => -5,
+            'tax_type' => '',
+            'discount' => -10,
             'discount_type' => '',
-            'items'         => [],
+            'items' => [],
         ]);
 
         $res->assertStatus(422);
@@ -62,12 +63,12 @@ class OrdersApiTest extends ApiTestCase
         $client = $this->makeClient();
 
         $payload = [
-            'client_id'     => $client->id,
-            'tax'           => 5,
-            'tax_type'      => TaxType::Percent->value,
-            'discount'      => 2,
+            'client_id' => $client->id,
+            'tax' => 5,
+            'tax_type' => TaxType::Percent->value,
+            'discount' => 2,
             'discount_type' => DiscountType::Fixed->value,
-            'items'         => [
+            'items' => [
                 ['item_id' => $this->makeItem(['price' => 10])->id, 'qty' => 2],
                 ['item_id' => $this->makeItem(['price' => 20])->id, 'qty' => 1],
             ],
@@ -82,12 +83,12 @@ class OrdersApiTest extends ApiTestCase
         $order = $this->makeOrder();
 
         $payload = [
-            'client_id'     => $order->client_id,
-            'tax'           => 0,
-            'tax_type'      => TaxType::Fixed->value,
-            'discount'      => 0,
+            'client_id' => $order->client_id,
+            'tax' => 0,
+            'tax_type' => TaxType::Fixed->value,
+            'discount' => 0,
             'discount_type' => DiscountType::Fixed->value,
-            'items'         => [
+            'items' => [
                 ['item_id' => $this->makeItem(['price' => 15])->id, 'qty' => 3],
             ],
         ];
@@ -101,10 +102,10 @@ class OrdersApiTest extends ApiTestCase
         $order = $this->makeOrder();
 
         Payment::query()->create([
-            'order_id'   => $order->id,
+            'order_id' => $order->id,
             'gateway_id' => $this->getGateway()->id,
-            'status'     => PaymentStatus::Successful,
-            'amount'     => 10,
+            'status' => PaymentStatus::Successful,
+            'amount' => 10,
         ]);
 
         $res = $this->putAuth("/api/orders/{$order->id}", [
@@ -143,11 +144,10 @@ class OrdersApiTest extends ApiTestCase
         $res->assertStatus(Response::HTTP_BAD_REQUEST);
     }
 
-
     public function test_pay_order_not_found(): void
     {
 
-        $res = $this->postAuth("/api/orders/8888888/pay", [
+        $res = $this->postAuth('/api/orders/8888888/pay', [
             'payment_gateway_id' => $this->getGateway()->id,
             'amount' => 100,
         ]);
@@ -177,14 +177,16 @@ class OrdersApiTest extends ApiTestCase
 
         $gateway = $this->getGateway();
 
-        $mock = Mockery::mock('overload:App\Services\PaymentService');
+        $mock = Mockery::mock(PaymentService::class);
         $mock->shouldReceive('makePayment')
             ->once()
             ->andReturnUsing(function ($payment) {
                 $payment->status = \App\Enums\PaymentStatus::Successful;
                 $payment->save();
+
                 return $payment;
             });
+        $this->app->instance(PaymentService::class, $mock);
 
         $res = $this->postAuth("/api/orders/{$order->id}/pay", [
             'payment_gateway_id' => $gateway->id,
@@ -199,15 +201,41 @@ class OrdersApiTest extends ApiTestCase
         ]);
     }
 
+    public function test_pay_order_rejects_an_already_paid_order(): void
+    {
+        $order = $this->makeOrder();
+
+        $this->postAuth("/api/orders/{$order->id}/change-status", [
+            'status' => OrderStatus::Confirmed->value,
+        ])->assertStatus(200);
+
+        $gateway = $this->getGateway();
+
+        Payment::query()->create([
+            'order_id' => $order->id,
+            'gateway_id' => $gateway->id,
+            'status' => PaymentStatus::Successful,
+            'amount' => $order->grand_total,
+        ]);
+
+        $res = $this->postAuth("/api/orders/{$order->id}/pay", [
+            'payment_gateway_id' => $gateway->id,
+            'amount' => (float) $order->grand_total,
+        ]);
+
+        $res->assertStatus(Response::HTTP_CONFLICT);
+        $this->assertSame(1, Payment::query()->where('order_id', $order->id)->count());
+    }
+
     public function test_destroy_order_blocked_if_has_payments(): void
     {
         $order = $this->makeOrder();
 
         Payment::query()->create([
-            'order_id'   => $order->id,
+            'order_id' => $order->id,
             'gateway_id' => $this->getGateway()->id,
-            'status'     => \App\Enums\PaymentStatus::Successful,
-            'amount'     => 10,
+            'status' => \App\Enums\PaymentStatus::Successful,
+            'amount' => 10,
         ]);
 
         $res = $this->deleteAuth("/api/orders/{$order->id}");

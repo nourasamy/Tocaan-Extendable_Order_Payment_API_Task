@@ -16,10 +16,10 @@ class GatewaysApiTest extends ApiTestCase
     public function test_store_gateway_validation_error(): void
     {
         $res = $this->postAuth('/api/gateways', [
-            'name'          => '',
-            'handler_key'   => '',
+            'name' => '',
+            'handler_key' => '',
             'handler_class' => '',
-            'active'        => '',
+            'active' => '',
         ]);
 
         $res->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -28,10 +28,10 @@ class GatewaysApiTest extends ApiTestCase
     public function test_store_gateway(): void
     {
         $store = $this->postAuth('/api/gateways', [
-            'name'          => 'Gateway A',
-            'handler_key'   => 'stripe_test',
+            'name' => 'Gateway A',
+            'handler_key' => 'stripe_test',
             'handler_class' => 'App\\Services\\Gateways\\StripeGateway',
-            'active'        => true,
+            'active' => true,
         ]);
 
         $store->assertStatus(Response::HTTP_CREATED);
@@ -50,10 +50,10 @@ class GatewaysApiTest extends ApiTestCase
         $gateway = $this->getGateway();
 
         $update = $this->putAuth("/api/gateways/{$gateway->id}", [
-            'name'          => 'Gateway A Updated',
-            'handler_key'   => 'stripe_live',
+            'name' => 'Gateway A Updated',
+            'handler_key' => 'stripe_live',
             'handler_class' => 'App\\Services\\Gateways\\StripeGateway',
-            'active'        => false,
+            'active' => false,
         ]);
 
         $update->assertStatus(Response::HTTP_OK);
@@ -66,5 +66,4 @@ class GatewaysApiTest extends ApiTestCase
         $del = $this->deleteAuth("/api/gateways/{$gateway->id}");
         $del->assertStatus(Response::HTTP_OK);
     }
-
 }

@@ -8,7 +8,7 @@ class GatewayRepositoryTest extends ApiUnitTestCase
 {
     public function test_create_gateway(): void
     {
-        $repo = new GatewayRepository();
+        $repo = new GatewayRepository;
 
         $gateway = $repo->create([
             'name' => 'Gateway A',
@@ -24,7 +24,7 @@ class GatewayRepositoryTest extends ApiUnitTestCase
 
     public function test_find_gateway_by_id(): void
     {
-        $repo = new GatewayRepository();
+        $repo = new GatewayRepository;
 
         $gateway = $repo->create([
             'name' => 'Gateway A',
@@ -42,7 +42,7 @@ class GatewayRepositoryTest extends ApiUnitTestCase
 
     public function test_update_gateway(): void
     {
-        $repo = new GatewayRepository();
+        $repo = new GatewayRepository;
 
         $gateway = $repo->create([
             'name' => 'Gateway B',
@@ -69,7 +69,7 @@ class GatewayRepositoryTest extends ApiUnitTestCase
 
     public function test_delete_gateway(): void
     {
-        $repo = new GatewayRepository();
+        $repo = new GatewayRepository;
 
         $gateway = $repo->create([
             'name' => 'Gateway C',
@@ -82,5 +82,5 @@ class GatewayRepositoryTest extends ApiUnitTestCase
 
         $deleted = $repo->delete($gateway->id);
         $this->assertTrue($deleted);
-    }   
+    }
 }

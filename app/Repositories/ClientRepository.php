@@ -6,7 +6,6 @@ use App\Models\Client;
 
 class ClientRepository
 {
-
     public function all()
     {
         return Client::all();
@@ -36,13 +35,14 @@ class ClientRepository
     {
         $client = $this->findById($id);
         $client->update($data);
+
         return $client;
     }
 
     public function delete($id)
     {
         $client = $this->findById($id);
+
         return $client->delete();
     }
-
 }

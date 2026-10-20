@@ -20,7 +20,7 @@ class ResponseHelper
     public static function JsonWithError(string $message = 'Error', int $status = 400, array $details = [])
     {
         $error = ['message' => __($message)];
-        if (!empty($details)) {
+        if (! empty($details)) {
             $error['details'] = $details;
         }
 

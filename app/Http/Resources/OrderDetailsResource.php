@@ -21,7 +21,7 @@ class OrderDetailsResource extends JsonResource
             'item_name' => $this->item ? $this->item->name : null,
             'price' => number_format($this->price, 2, '.', ''),
             'qty' => $this->qty,
-            'total' => number_format($this->total, 2, '.', '')
+            'total' => number_format($this->total, 2, '.', ''),
 
         ];
     }

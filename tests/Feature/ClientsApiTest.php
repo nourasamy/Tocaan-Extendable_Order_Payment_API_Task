@@ -28,7 +28,7 @@ class ClientsApiTest extends ApiTestCase
     public function test_store_client(): void
     {
         $payload = [
-            'name'  => 'Client A',
+            'name' => 'Client A',
             'phone' => '01012345678',
         ];
 
@@ -39,7 +39,7 @@ class ClientsApiTest extends ApiTestCase
     public function test_show_client(): void
     {
         $client = $this->makeClient([
-            'name'  => 'Client B',
+            'name' => 'Client B',
             'phone' => '01087654321',
         ]);
 
@@ -50,12 +50,12 @@ class ClientsApiTest extends ApiTestCase
     public function test_update_client(): void
     {
         $client = $this->makeClient([
-            'name'  => 'Client C',
+            'name' => 'Client C',
             'phone' => '01055556666',
         ]);
 
         $updatePayload = [
-            'name'  => 'Client C Updated',
+            'name' => 'Client C Updated',
             'phone' => '01099998888',
         ];
 

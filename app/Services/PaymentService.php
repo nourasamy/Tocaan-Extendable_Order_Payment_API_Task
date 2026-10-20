@@ -3,36 +3,29 @@
 namespace App\Services;
 
 use App\Enums\PaymentStatus;
-use App\Factories\PaymentGatewayFactory ;
+use App\Factories\PaymentGatewayFactory;
 use App\Models\Payment;
+use RuntimeException;
 
 class PaymentService
 {
-    public function makePayment(Payment $payment)
+    public function makePayment(Payment $payment): Payment
     {
-
         $method = $payment->gateway?->handler_key;
 
         if (! $method) {
             $payment->status = PaymentStatus::Failed;
             $payment->save();
-            throw new \Exception('Payment method not specified');
+            throw new RuntimeException('Payment method not specified');
         }
 
-        $gatewayResult = PaymentGatewayFactory::make($method);
+        $successful = PaymentGatewayFactory::make($method)->pay($payment);
 
-        $gatewayResult = $gatewayResult->pay($payment);
-
-        if ($gatewayResult) {
-            $payment->status = PaymentStatus::Successful;
-            $payment->save();
-        }
-        else {
-            $payment->status = PaymentStatus::Failed;
-            $payment->save();
-        }
+        $payment->status = $successful
+            ? PaymentStatus::Successful
+            : PaymentStatus::Failed;
+        $payment->save();
 
         return $payment;
-
     }
 }

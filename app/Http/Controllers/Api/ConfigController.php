@@ -1,18 +1,19 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-use App\Http\Controllers\Controller;
+
+use App\Enums\DiscountType;
 use App\Enums\OrderStatus;
 use App\Enums\TaxType;
-use App\Enums\DiscountType;
 use App\Helpers\ResponseHelper;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 
 class ConfigController extends Controller
 {
-    public function getOrderStatuses()
+    public function getOrderStatuses(): JsonResponse
     {
-        try
-        {
+        try {
             $statuses = [];
             foreach (OrderStatus::cases() as $status) {
                 $statuses[] = [
@@ -23,15 +24,14 @@ class ConfigController extends Controller
 
             return ResponseHelper::jsonWithSuccess($statuses, 'Order statuses retrieved successfully', 200);
 
-        }catch (\Exception $e){
-            return ResponseHelper::JsonWithError($e->getMessage(), 500);
+        } catch (\Throwable $exception) {
+            return $this->serverError($exception, 'Unable to retrieve order statuses.');
         }
     }
 
-    public function getTaxTypes()
+    public function getTaxTypes(): JsonResponse
     {
-        try
-        {
+        try {
             $statuses = [];
             foreach (TaxType::cases() as $status) {
                 $statuses[] = [
@@ -42,14 +42,14 @@ class ConfigController extends Controller
 
             return ResponseHelper::jsonWithSuccess($statuses, 'Tax types retrieved successfully', 200);
 
-        }catch (\Exception $e){
-            return ResponseHelper::JsonWithError($e->getMessage(), 500);
+        } catch (\Throwable $exception) {
+            return $this->serverError($exception, 'Unable to retrieve tax types.');
         }
     }
-    public function getDiscountTypes()
+
+    public function getDiscountTypes(): JsonResponse
     {
-        try
-        {
+        try {
             $statuses = [];
             foreach (DiscountType::cases() as $status) {
                 $statuses[] = [
@@ -60,8 +60,8 @@ class ConfigController extends Controller
 
             return ResponseHelper::jsonWithSuccess($statuses, 'Discount types retrieved successfully', 200);
 
-        }catch (\Exception $e){
-            return ResponseHelper::JsonWithError($e->getMessage(), 500);
+        } catch (\Throwable $exception) {
+            return $this->serverError($exception, 'Unable to retrieve discount types.');
         }
     }
 }

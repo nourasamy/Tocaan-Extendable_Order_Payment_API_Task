@@ -7,29 +7,36 @@ use App\Enums\OrderStatus;
 use App\Enums\TaxType;
 use App\Models\Item;
 use App\Models\Order;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
 class OrderRepository
 {
-    public function paginate($perPage = 15)
+    private array $relations = [
+        'client',
+        'orderDetails.item',
+        'payments.gateway',
+    ];
+
+    public function paginate(int $perPage = 15, ?int $status = null): LengthAwarePaginator
     {
-        $orders = Order::query();
-        if(request()->has('status')){
-            $orders = $orders->status(request()->get('status'));
+        $orders = Order::query()->with($this->relations);
+
+        if ($status !== null) {
+            $orders->status($status);
         }
+
         return $orders->paginate($perPage);
     }
 
-    public function findById($id)
+    public function findById(int|string $id): ?Order
     {
-        return Order::find($id);
+        return Order::with($this->relations)->find($id);
     }
 
-    public function create($data)
+    public function create(array $data): Order
     {
-        try{
-            DB::beginTransaction();
-
+        return DB::transaction(function () use ($data): Order {
             $order = Order::create([
                 'client_id' => $data['client_id'],
                 'tax' => $data['tax'] ?? 0,
@@ -41,41 +48,40 @@ class OrderRepository
                 'grand_total' => 0,
             ]);
 
-            $order->orderDetails()->createMany(array_map(function ($item){
-                $item['price'] = Item::find($item['item_id'])->price;
+            $items = Item::query()
+                ->whereIn('id', array_column($data['items'], 'item_id'))
+                ->get()
+                ->keyBy('id');
+
+            $order->orderDetails()->createMany(array_map(function ($item) use ($items) {
+                $price = $items[$item['item_id']]->price;
+
                 return [
                     'item_id' => $item['item_id'],
-                    'price' => $item['price'],
+                    'price' => $price,
                     'qty' => $item['qty'],
-                    'total' => $item['price'] * $item['qty'],
+                    'total' => $price * $item['qty'],
                 ];
             }, $data['items']));
 
+            $order->unsetRelation('orderDetails');
             $subtotal = $order->orderDetails->sum('total');
             $calculatedTax = $this->calculateTax($subtotal, $order->tax, $order->tax_type);
             $calculatedDiscount = $this->calculateDiscount($subtotal, $order->discount, $order->discount_type);
 
-            $grandTotal = $subtotal + $calculatedTax - $calculatedDiscount;
+            $grandTotal = max(0, $subtotal + $calculatedTax - $calculatedDiscount);
 
             $order->subtotal = $subtotal;
             $order->grand_total = $grandTotal;
             $order->save();
 
-            DB::commit();
-
-            return $order;
-
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return null;
-        }
-
+            return $order->load($this->relations);
+        });
     }
 
-    public function update($id, $data)
+    public function update(int|string $id, array $data): Order
     {
-       try {
-            DB::beginTransaction();
+        return DB::transaction(function () use ($id, $data): Order {
             $order = $this->findById($id);
             $order->update([
                 'client_id' => $data['client_id'],
@@ -85,81 +91,72 @@ class OrderRepository
                 'discount_type' => $data['discount_type'] ?? null,
             ]);
             $order->orderDetails()->delete();
-            $order->orderDetails()->createMany(array_map(function ($item) {
-                $item['price'] = Item::find($item['item_id'])?->price;
+
+            $items = Item::query()
+                ->whereIn('id', array_column($data['items'], 'item_id'))
+                ->get()
+                ->keyBy('id');
+
+            $order->orderDetails()->createMany(array_map(function ($item) use ($items) {
+                $price = $items[$item['item_id']]->price;
+
                 return [
                     'item_id' => $item['item_id'],
-                    'price' => $item['price'],
                     'qty' => $item['qty'],
-                    'total' => $item['price'] * $item['qty'],
+                    'price' => $price,
+                    'total' => $price * $item['qty'],
                 ];
             }, $data['items']));
 
+            $order->unsetRelation('orderDetails');
             $subtotal = $order->orderDetails->sum('total');
             $calculatedTax = $this->calculateTax($subtotal, $order->tax, $order->tax_type);
             $calculatedDiscount = $this->calculateDiscount($subtotal, $order->discount, $order->discount_type);
-            $grandTotal = $subtotal + $calculatedTax - $calculatedDiscount;
+            $grandTotal = max(0, $subtotal + $calculatedTax - $calculatedDiscount);
 
             $order->subtotal = $subtotal;
             $order->grand_total = $grandTotal;
             $order->save();
 
-            DB::commit();
-
-            return $order;
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return null;
-        }
+            return $order->load($this->relations);
+        });
     }
 
     public function calculateTax($subtotal, $tax, $taxType)
     {
-        if ($taxType == TaxType::Percent) {
+        if ($taxType === TaxType::Percent) {
             return ($subtotal * $tax) / 100;
         }
+
         return $tax;
     }
 
     public function calculateDiscount($subtotal, $discount, $discountType)
     {
-        if ($discountType == DiscountType::Percent) {
+        if ($discountType === DiscountType::Percent) {
             return ($subtotal * $discount) / 100;
         }
+
         return $discount;
     }
 
-    public function changeStatus($id, $data)
+    public function changeStatus(int|string $id, array $data): Order
     {
-        try {
-            $order = $this->findById($id);
-            $order->status = $data['status'];
-            $order->save();
+        $order = $this->findById($id);
+        $order->status = $data['status'];
+        $order->save();
 
-            return $order;
-        } catch (\Exception $e) {
-            return null;
-        }
+        return $order->load($this->relations);
     }
 
-
-    public function delete($id)
+    public function delete(int|string $id): bool
     {
-        try{
-            DB::beginTransaction();
-
+        return DB::transaction(function () use ($id): bool {
             $order = $this->findById($id);
             $order->orderDetails()->delete();
             $order->delete();
-            DB::commit();
 
             return true;
-
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return false;
-        }
-
+        });
     }
-
 }

@@ -6,13 +6,12 @@ use App\Repositories\ClientRepository;
 
 class ClientRepositoryTest extends ApiUnitTestCase
 {
-
-    public function test_index_clients():void
+    public function test_index_clients(): void
     {
-        $repo = new ClientRepository();
+        $repo = new ClientRepository;
 
         $repo->create([
-            'name'  => 'Client X',
+            'name' => 'Client X',
             'phone' => '01011112222',
         ]);
 
@@ -20,10 +19,9 @@ class ClientRepositoryTest extends ApiUnitTestCase
         $this->assertTrue($clients->count() >= 1);
     }
 
-
     public function test_create_client(): void
     {
-        $repo = new ClientRepository();
+        $repo = new ClientRepository;
 
         $client = $repo->create([
             'name' => 'Client A',
@@ -35,7 +33,7 @@ class ClientRepositoryTest extends ApiUnitTestCase
 
     public function test_update_client(): void
     {
-        $repo = new ClientRepository();
+        $repo = new ClientRepository;
 
         $client = $repo->create([
             'name' => 'Client B',
@@ -53,7 +51,7 @@ class ClientRepositoryTest extends ApiUnitTestCase
 
     public function test_delete_client(): void
     {
-        $repo = new ClientRepository();
+        $repo = new ClientRepository;
 
         $client = $repo->create([
             'name' => 'Client C',
@@ -66,7 +64,7 @@ class ClientRepositoryTest extends ApiUnitTestCase
 
     public function test_show_client(): void
     {
-        $repo = new ClientRepository();
+        $repo = new ClientRepository;
 
         $client = $repo->create([
             'name' => 'Client D',
@@ -77,5 +75,4 @@ class ClientRepositoryTest extends ApiUnitTestCase
         $this->assertEquals($client->name, $fetchedClient->name);
         $this->assertEquals($client->phone, $fetchedClient->phone);
     }
-
 }

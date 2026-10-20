@@ -21,7 +21,6 @@ class ItemRepository
         return Item::find($id);
     }
 
-
     public function create(array $data)
     {
         return Item::create($data);
@@ -31,13 +30,14 @@ class ItemRepository
     {
         $item = $this->findById($id);
         $item->update($data);
+
         return $item;
     }
 
     public function delete($id)
     {
         $item = $this->findById($id);
+
         return $item->delete();
     }
-
 }

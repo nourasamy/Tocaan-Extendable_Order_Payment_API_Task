@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Models\OrderDetail;
 use Symfony\Component\HttpFoundation\Response;
 
 class ItemsApiTest extends ApiTestCase
@@ -18,7 +17,7 @@ class ItemsApiTest extends ApiTestCase
     public function test_store_item(): void
     {
         $store = $this->postAuth('/api/items', [
-            'name'  => 'Item A',
+            'name' => 'Item A',
             'price' => 12.50,
         ]);
 
@@ -29,7 +28,7 @@ class ItemsApiTest extends ApiTestCase
     public function test_store_item_validation_error(): void
     {
         $res = $this->postAuth('/api/items', [
-            'name'  => '',
+            'name' => '',
             'price' => -5,
         ]);
 
@@ -39,7 +38,7 @@ class ItemsApiTest extends ApiTestCase
     public function test_show_item(): void
     {
         $item = $this->makeItem([
-            'name'  => 'Item A',
+            'name' => 'Item A',
             'price' => 10.00,
         ]);
 
@@ -50,12 +49,12 @@ class ItemsApiTest extends ApiTestCase
     public function test_update_item(): void
     {
         $item = $this->makeItem([
-            'name'  => 'Item B',
+            'name' => 'Item B',
             'price' => 15.00,
         ]);
 
         $update = $this->putAuth("/api/items/{$item->id}", [
-            'name'  => 'Item B Updated',
+            'name' => 'Item B Updated',
             'price' => 20.00,
         ]);
 
@@ -65,7 +64,7 @@ class ItemsApiTest extends ApiTestCase
     public function test_delete_item(): void
     {
         $item = $this->makeItem([
-            'name'  => 'Item C',
+            'name' => 'Item C',
             'price' => 18.00,
         ]);
 

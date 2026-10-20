@@ -33,7 +33,6 @@ class Order extends Model
         ];
     }
 
-
     public function client()
     {
         return $this->belongsTo(Client::class);
@@ -49,7 +48,7 @@ class Order extends Model
         return $this->hasMany(Payment::class);
     }
 
-     public function scopeStatus($query, $status)
+    public function scopeStatus($query, $status)
     {
         return $query->where('status', $status);
     }

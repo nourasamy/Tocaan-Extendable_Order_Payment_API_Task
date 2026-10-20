@@ -11,7 +11,7 @@ class OrderRepositoryTest extends ApiUnitTestCase
 {
     public function test_calculate_tax(): void
     {
-        $repo = new OrderRepository();
+        $repo = new OrderRepository;
 
         $tax = $repo->calculateTax(100, 10, TaxType::Percent);
         $this->assertEquals(10, $tax);
@@ -22,7 +22,7 @@ class OrderRepositoryTest extends ApiUnitTestCase
 
     public function test_calculate_discount(): void
     {
-        $repo = new OrderRepository();
+        $repo = new OrderRepository;
         $disc = $repo->calculateDiscount(200, 10, DiscountType::Percent);
         $this->assertEquals(20, $disc);
 
@@ -32,10 +32,10 @@ class OrderRepositoryTest extends ApiUnitTestCase
 
     public function test_create_order(): void
     {
-        $repo = new OrderRepository();
+        $repo = new OrderRepository;
 
         $payload = $this->getOrder([
-            'payload' => [
+            'data' => [
                 'tax' => 10,
                 'tax_type' => TaxType::Percent->value,
                 'discount' => 5,
@@ -48,13 +48,13 @@ class OrderRepositoryTest extends ApiUnitTestCase
         $this->assertNotNull($order);
         $this->assertEquals(OrderStatus::Pending, $order->status);
 
-        $this->assertEquals('250.00', number_format((float)$order->subtotal, 2, '.', ''));
-        $this->assertEquals('270.00', number_format((float)$order->grand_total, 2, '.', ''));
+        $this->assertEquals('250.00', number_format((float) $order->subtotal, 2, '.', ''));
+        $this->assertEquals('270.00', number_format((float) $order->grand_total, 2, '.', ''));
     }
 
     public function test_update_order(): void
     {
-        $repo = new OrderRepository();
+        $repo = new OrderRepository;
 
         $order = $repo->create($this->getOrder());
         $this->assertNotNull($order);
@@ -73,13 +73,29 @@ class OrderRepositoryTest extends ApiUnitTestCase
         ]);
 
         $this->assertNotNull($updated);
-        $this->assertEquals('200.00', number_format((float)$updated->subtotal, 2, '.', ''));
-        $this->assertEquals('200.00', number_format((float)$updated->grand_total, 2, '.', ''));
+        $this->assertEquals('200.00', number_format((float) $updated->subtotal, 2, '.', ''));
+        $this->assertEquals('200.00', number_format((float) $updated->grand_total, 2, '.', ''));
+    }
+
+    public function test_order_total_cannot_be_negative(): void
+    {
+        $repo = new OrderRepository;
+
+        $order = $repo->create($this->getOrder([
+            'data' => [
+                'tax' => 0,
+                'tax_type' => TaxType::Fixed->value,
+                'discount' => 500,
+                'discount_type' => DiscountType::Fixed->value,
+            ],
+        ]));
+
+        $this->assertSame('0.00', number_format((float) $order->grand_total, 2, '.', ''));
     }
 
     public function test_change_status(): void
     {
-        $repo = new OrderRepository();
+        $repo = new OrderRepository;
 
         $order = $repo->create($this->getOrder());
         $this->assertNotNull($order);
@@ -91,7 +107,7 @@ class OrderRepositoryTest extends ApiUnitTestCase
 
     public function test_delete_order_deletes_details(): void
     {
-        $repo = new OrderRepository();
+        $repo = new OrderRepository;
 
         $order = $repo->create($this->getOrder());
         $this->assertNotNull($order);

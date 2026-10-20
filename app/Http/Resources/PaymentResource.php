@@ -20,7 +20,7 @@ class PaymentResource extends JsonResource
             'gateway_id' => $this->gateway_id,
             'status' => $this->status->label(),
             'amount' => number_format($this->amount, 2, '.', ''),
-           // 'order' => new OrderResource($this->whenLoaded('order')),
+            // 'order' => new OrderResource($this->whenLoaded('order')),
             'gateway' => new GatewayResource($this->whenLoaded('gateway')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
@@ -32,7 +32,7 @@ class PaymentResource extends JsonResource
      */
     private function getStatusLabel(): string
     {
-        return match($this->status) {
+        return match ($this->status) {
             1 => 'Pending',
             2 => 'Successful',
             3 => 'Failed',
