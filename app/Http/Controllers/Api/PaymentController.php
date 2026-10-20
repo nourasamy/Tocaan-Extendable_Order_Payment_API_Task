@@ -1,0 +1,68 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Helpers\ResponseHelper;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\PaymentResource;
+use App\Repositories\PaymentRepository;
+use App\Repositories\OrderRepository;
+use Illuminate\Http\Response;
+
+class PaymentController extends Controller
+{
+    protected PaymentRepository $paymentRepository;
+    protected OrderRepository $orderRepository;
+
+    public function __construct(PaymentRepository $paymentRepository, OrderRepository $orderRepository)
+    {
+        $this->paymentRepository = $paymentRepository;
+        $this->orderRepository = $orderRepository;
+    }
+
+    public function index()
+    {
+        try{
+
+            $payments = $this->paymentRepository->paginate();
+            return ResponseHelper::jsonWithSuccess(PaymentResource::collection($payments), 'Payments retrieved successfully', Response::HTTP_OK);
+
+        }catch (\Exception $e){
+            return ResponseHelper::JsonWithError($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        }
+    }
+
+    public function show($id)
+    {
+        try{
+
+            $payment = $this->paymentRepository->findById($id);
+            if(!$payment){
+                return ResponseHelper::JsonWithError('Payment not found', Response::HTTP_NOT_FOUND);
+            }
+            return ResponseHelper::jsonWithSuccess(new PaymentResource($payment), 'Payment retrieved successfully', Response::HTTP_OK);
+
+        }catch (\Exception $e){
+            return ResponseHelper::JsonWithError($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        }
+    }
+
+    public function getPaymentsByOrder($orderId)
+    {
+        try{
+            $order = $this->orderRepository->findById($orderId);
+            if(!$order){
+                return ResponseHelper::JsonWithError('Order not found', Response::HTTP_NOT_FOUND);
+            }
+            $payments = $this->paymentRepository->getByOrders($orderId);
+            return ResponseHelper::JsonWithPagination($payments, PaymentResource::collection($payments), 'Payments for order retrieved successfully');
+
+        }catch (\Exception $e){
+            return ResponseHelper::JsonWithError($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        }
+    }
+
+}

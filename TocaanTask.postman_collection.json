@@ -1,0 +1,2600 @@
+{
+  "info": {
+    "_postman_id": "2ea1e5d8-0499-4381-959f-518422938d03",
+    "name": "TocaanTask",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "59087841",
+    "_collection_link": "https://go.postman.co/collection/59087841-2ea1e5d8-0499-4381-959f-518422938d03?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "noura",
+                  "description": "required|string|max:255",
+                  "type": "text",
+                  "uuid": "a15056c6-bb19-452f-81dd-31066b533ddb"
+                },
+                {
+                  "key": "email",
+                  "value": "nourasamy4@email.com",
+                  "description": "required|email|unique:users,email",
+                  "type": "text",
+                  "uuid": "82dee3cd-c658-4245-a86f-e62952329bec"
+                },
+                {
+                  "key": "password",
+                  "value": "123456",
+                  "description": "required|string|min:6",
+                  "type": "text",
+                  "uuid": "939fb928-fb5d-45cd-a436-50dff8939fd7"
+                },
+                {
+                  "key": "password_confirmation",
+                  "value": "123456",
+                  "description": "same as password",
+                  "type": "text",
+                  "uuid": "6dca149e-0bf8-4a09-a217-e4c67c1310fe"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Register",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "noura",
+                      "type": "text",
+                      "uuid": "a15056c6-bb19-452f-81dd-31066b533ddb"
+                    },
+                    {
+                      "key": "email",
+                      "value": "nourasamy4@email.com",
+                      "type": "text",
+                      "uuid": "82dee3cd-c658-4245-a86f-e62952329bec"
+                    },
+                    {
+                      "key": "password",
+                      "value": "123456",
+                      "type": "text",
+                      "uuid": "939fb928-fb5d-45cd-a436-50dff8939fd7"
+                    },
+                    {
+                      "key": "password_confirmation",
+                      "value": "123456",
+                      "type": "text",
+                      "uuid": "6dca149e-0bf8-4a09-a217-e4c67c1310fe"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\n    \"success\": true,\n    \"data\": {\n        \"name\": \"noura\",\n        \"email\": \"nourasamy4@email.com\",\n        \"updated_at\": \"2026-02-02T14:44:29.000000Z\",\n        \"created_at\": \"2026-02-02T14:44:29.000000Z\",\n        \"id\": 19,\n        \"access_token\": \"{{json_web_token_0m91}}\"\n    },\n    \"message\": \"registered successfully.\"\n}"
+            },
+            {
+              "name": "ValidationErrors",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "noura",
+                      "type": "text",
+                      "uuid": "a15056c6-bb19-452f-81dd-31066b533ddb",
+                      "disabled": true
+                    },
+                    {
+                      "key": "email",
+                      "value": "nourasamy4@email.com",
+                      "type": "text",
+                      "uuid": "82dee3cd-c658-4245-a86f-e62952329bec",
+                      "disabled": true
+                    },
+                    {
+                      "key": "password",
+                      "value": "123456",
+                      "type": "text",
+                      "uuid": "939fb928-fb5d-45cd-a436-50dff8939fd7",
+                      "disabled": true
+                    },
+                    {
+                      "key": "password_confirmation",
+                      "value": "123456",
+                      "type": "text",
+                      "uuid": "6dca149e-0bf8-4a09-a217-e4c67c1310fe",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Unprocessable Content",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\r\n    \"message\": \"The name field is required. (and 2 more errors)\",\r\n    \"errors\": {\r\n        \"name\": [\r\n            \"The name field is required.\"\r\n        ],\r\n        \"email\": [\r\n            \"The email field is required.\"\r\n        ],\r\n        \"password\": [\r\n            \"The password field is required.\"\r\n        ]\r\n    }\r\n}\r\n\r\n{\r\n    \"message\": \"The email has already been taken. (and 1 more error)\",\r\n    \"errors\": {\r\n        \"email\": [\r\n            \"The email has already been taken.\"\r\n        ],\r\n        \"password\": [\r\n            \"The password field confirmation does not match.\"\r\n        ]\r\n    }\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "email",
+                  "value": "nourasamy@email.com",
+                  "description": "required|email",
+                  "type": "text",
+                  "uuid": "82dee3cd-c658-4245-a86f-e62952329bec"
+                },
+                {
+                  "key": "password",
+                  "value": "123456",
+                  "description": "required|string",
+                  "type": "text",
+                  "uuid": "939fb928-fb5d-45cd-a436-50dff8939fd7"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Login",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "email",
+                      "value": "nourasamy@email.com",
+                      "type": "text",
+                      "uuid": "82dee3cd-c658-4245-a86f-e62952329bec"
+                    },
+                    {
+                      "key": "password",
+                      "value": "123456",
+                      "type": "text",
+                      "uuid": "939fb928-fb5d-45cd-a436-50dff8939fd7"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": {\r\n        \"id\": 17,\r\n        \"name\": \"noura\",\r\n        \"email\": \"nourasamy@email.com\",\r\n        \"email_verified_at\": null,\r\n        \"created_at\": \"2026-02-02T14:39:57.000000Z\",\r\n        \"updated_at\": \"2026-02-02T14:39:57.000000Z\",\r\n        \"access_token\": \"{{json_web_token_0qwc}}\"\r\n    },\r\n    \"message\": \"logged in successfully.\"\r\n}"
+            },
+            {
+              "name": "FaildLogin",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "email",
+                      "value": "nourasamy@email.comxxx",
+                      "description": "required|email",
+                      "type": "text",
+                      "uuid": "82dee3cd-c658-4245-a86f-e62952329bec"
+                    },
+                    {
+                      "key": "password",
+                      "value": "123456",
+                      "description": "required|string",
+                      "type": "text",
+                      "uuid": "939fb928-fb5d-45cd-a436-50dff8939fd7"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [],
+              "body": "{\r\n    \"success\": false,\r\n    \"errors\": {\r\n        \"message\": \"Invalid email or password.\"\r\n    }\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "logout"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Logout",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "email",
+                      "value": "nourasamy@email.com",
+                      "type": "text",
+                      "uuid": "82dee3cd-c658-4245-a86f-e62952329bec"
+                    },
+                    {
+                      "key": "password",
+                      "value": "123456",
+                      "type": "text",
+                      "uuid": "939fb928-fb5d-45cd-a436-50dff8939fd7"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/logout",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "logout"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": null,\r\n    \"message\": \"Successfully logged out.\"\r\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Clients",
+      "item": [
+        {
+          "name": "AllClinets",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "email",
+                  "value": "nourasamy@email.com",
+                  "type": "text",
+                  "uuid": "82dee3cd-c658-4245-a86f-e62952329bec"
+                },
+                {
+                  "key": "password",
+                  "value": "123456",
+                  "type": "text",
+                  "uuid": "939fb928-fb5d-45cd-a436-50dff8939fd7"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/clients",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "clients"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "AllClients",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/clients",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "clients"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"John Doe\",\r\n            \"phone\": \"1234567890\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"name\": \"Jane Smith\",\r\n            \"phone\": \"0987654321\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"name\": \"Michael Johnson\",\r\n            \"phone\": \"1122334455\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"name\": \"Emily Williams\",\r\n            \"phone\": \"5544332211\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"name\": \"David Brown\",\r\n            \"phone\": \"9876543210\"\r\n        },\r\n        {\r\n            \"id\": 6,\r\n            \"name\": \"Sarah Davis\",\r\n            \"phone\": \"1357924680\"\r\n        },\r\n        {\r\n            \"id\": 7,\r\n            \"name\": \"James Miller\",\r\n            \"phone\": \"2468013579\"\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"name\": \"Jennifer Wilson\",\r\n            \"phone\": \"3691234567\"\r\n        },\r\n        {\r\n            \"id\": 9,\r\n            \"name\": \"Robert Moore\",\r\n            \"phone\": \"7654321098\"\r\n        },\r\n        {\r\n            \"id\": 10,\r\n            \"name\": \"Lisa Taylor\",\r\n            \"phone\": \"1029384756\"\r\n        }\r\n    ],\r\n    \"meta\": {\r\n        \"current_page\": 1,\r\n        \"per_page\": 15,\r\n        \"number_of_items\": 10,\r\n        \"number_of_pages\": 1\r\n    },\r\n    \"message\": \"Data retrieved successfully\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "ShowClient",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "email",
+                  "value": "nourasamy@email.com",
+                  "type": "text",
+                  "uuid": "82dee3cd-c658-4245-a86f-e62952329bec"
+                },
+                {
+                  "key": "password",
+                  "value": "123456",
+                  "type": "text",
+                  "uuid": "939fb928-fb5d-45cd-a436-50dff8939fd7"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/clients/7",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "clients",
+                "7"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Show",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/clients/7",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "clients",
+                    "7"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": {\r\n        \"id\": 7,\r\n        \"name\": \"James Miller\",\r\n        \"phone\": \"2468013579\"\r\n    },\r\n    \"message\": \"Client retrieved successfully\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "CreateClient",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "test client",
+                  "description": "required|string|max:255",
+                  "type": "text",
+                  "uuid": "82dee3cd-c658-4245-a86f-e62952329bec"
+                },
+                {
+                  "key": "phone",
+                  "value": "01112297239",
+                  "description": "required|string|unique:clients,phone",
+                  "type": "text",
+                  "uuid": "939fb928-fb5d-45cd-a436-50dff8939fd7"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/clients",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "clients"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Create",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "test client",
+                      "description": "required|string|max:255",
+                      "type": "text",
+                      "uuid": "82dee3cd-c658-4245-a86f-e62952329bec"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "01112297239",
+                      "description": "required|string|unique:clients,phone",
+                      "type": "text",
+                      "uuid": "939fb928-fb5d-45cd-a436-50dff8939fd7"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/clients",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "clients"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": {\r\n        \"id\": 11,\r\n        \"name\": \"test client\",\r\n        \"phone\": \"01112297239\"\r\n    },\r\n    \"message\": \"Client created successfully\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "UpdateClients",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"test client2\",\r\n  \"phone\": \"01118297239\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/clients/170",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "clients",
+                "170"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"test client\",\r\n  \"phone\": \"01112297239\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/clients/11",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "clients",
+                    "11"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": {\r\n        \"id\": 11,\r\n        \"name\": \"test client2\",\r\n        \"phone\": \"01112297239\"\r\n    },\r\n    \"message\": \"Client updated successfully\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "DeleteClient",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"test client\",\r\n  \"phone\": \"01112297239\"\r\n}\r\n"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/clients/170",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "clients",
+                "170"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Delete",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"test client\",\r\n  \"phone\": \"01112297239\"\r\n}\r\n"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/clients/11",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "clients",
+                    "11"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": null,\r\n    \"message\": \"Client deleted successfully\"\r\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Items",
+      "item": [
+        {
+          "name": "AllItems",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "email",
+                  "value": "nourasamy@email.com",
+                  "type": "text",
+                  "uuid": "82dee3cd-c658-4245-a86f-e62952329bec"
+                },
+                {
+                  "key": "password",
+                  "value": "123456",
+                  "type": "text",
+                  "uuid": "939fb928-fb5d-45cd-a436-50dff8939fd7"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/items",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "items"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "All",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"Laptop\",\r\n            \"price\": \"999.99\",\r\n            \"created_at\": \"2026-02-02T12:38:20.000000Z\",\r\n            \"updated_at\": \"2026-02-02T12:38:20.000000Z\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"name\": \"Monitor\",\r\n            \"price\": \"299.99\",\r\n            \"created_at\": \"2026-02-02T12:38:20.000000Z\",\r\n            \"updated_at\": \"2026-02-02T12:38:20.000000Z\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"name\": \"Keyboard\",\r\n            \"price\": \"79.99\",\r\n            \"created_at\": \"2026-02-02T12:38:20.000000Z\",\r\n            \"updated_at\": \"2026-02-02T12:38:20.000000Z\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"name\": \"Mouse\",\r\n            \"price\": \"29.99\",\r\n            \"created_at\": \"2026-02-02T12:38:20.000000Z\",\r\n            \"updated_at\": \"2026-02-02T12:38:20.000000Z\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"name\": \"USB Cable\",\r\n            \"price\": \"9.99\",\r\n            \"created_at\": \"2026-02-02T12:38:20.000000Z\",\r\n            \"updated_at\": \"2026-02-02T12:38:20.000000Z\"\r\n        },\r\n        {\r\n            \"id\": 6,\r\n            \"name\": \"Headphones\",\r\n            \"price\": \"149.99\",\r\n            \"created_at\": \"2026-02-02T12:38:20.000000Z\",\r\n            \"updated_at\": \"2026-02-02T12:38:20.000000Z\"\r\n        },\r\n        {\r\n            \"id\": 7,\r\n            \"name\": \"Webcam\",\r\n            \"price\": \"59.99\",\r\n            \"created_at\": \"2026-02-02T12:38:20.000000Z\",\r\n            \"updated_at\": \"2026-02-02T12:38:20.000000Z\"\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"name\": \"External HDD\",\r\n            \"price\": \"89.99\",\r\n            \"created_at\": \"2026-02-02T12:38:20.000000Z\",\r\n            \"updated_at\": \"2026-02-02T12:38:20.000000Z\"\r\n        },\r\n        {\r\n            \"id\": 9,\r\n            \"name\": \"SSD 500GB\",\r\n            \"price\": \"59.99\",\r\n            \"created_at\": \"2026-02-02T12:38:20.000000Z\",\r\n            \"updated_at\": \"2026-02-02T12:38:20.000000Z\"\r\n        },\r\n        {\r\n            \"id\": 10,\r\n            \"name\": \"RAM 16GB\",\r\n            \"price\": \"129.99\",\r\n            \"created_at\": \"2026-02-02T12:38:20.000000Z\",\r\n            \"updated_at\": \"2026-02-02T12:38:20.000000Z\"\r\n        }\r\n    ],\r\n    \"meta\": {\r\n        \"current_page\": 1,\r\n        \"per_page\": 15,\r\n        \"number_of_items\": 10,\r\n        \"number_of_pages\": 1\r\n    },\r\n    \"message\": \"Data retrieved successfully\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "ShowItem",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "email",
+                  "value": "nourasamy@email.com",
+                  "type": "text",
+                  "uuid": "82dee3cd-c658-4245-a86f-e62952329bec"
+                },
+                {
+                  "key": "password",
+                  "value": "123456",
+                  "type": "text",
+                  "uuid": "939fb928-fb5d-45cd-a436-50dff8939fd7"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/items/7",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "items",
+                "7"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Show",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items/7",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items",
+                    "7"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": {\r\n        \"id\": 7,\r\n        \"name\": \"Webcam\",\r\n        \"price\": \"59.99\",\r\n        \"created_at\": \"2026-02-02T12:38:20.000000Z\",\r\n        \"updated_at\": \"2026-02-02T12:38:20.000000Z\"\r\n    },\r\n    \"message\": \"Item retrieved successfully\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "CreateItem",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "test item",
+                  "description": "required|string|max:255",
+                  "type": "text",
+                  "uuid": "82dee3cd-c658-4245-a86f-e62952329bec"
+                },
+                {
+                  "key": "price",
+                  "value": "200",
+                  "description": "required|numeric|decimal:0,2",
+                  "type": "text",
+                  "uuid": "939fb928-fb5d-45cd-a436-50dff8939fd7"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/items",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "items"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Create",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "test item",
+                      "description": "required|string|max:255",
+                      "type": "text",
+                      "uuid": "82dee3cd-c658-4245-a86f-e62952329bec"
+                    },
+                    {
+                      "key": "price",
+                      "value": "200",
+                      "description": "required|numeric|decimal:0,2",
+                      "type": "text",
+                      "uuid": "939fb928-fb5d-45cd-a436-50dff8939fd7"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/items",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": {\r\n        \"id\": 12,\r\n        \"name\": \"test item\",\r\n        \"price\": \"200.00\",\r\n        \"created_at\": \"2026-02-02T15:20:32.000000Z\",\r\n        \"updated_at\": \"2026-02-02T15:20:32.000000Z\"\r\n    },\r\n    \"message\": \"Item created successfully\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "UpdateItem",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"test item2\",\r\n  \"price\": 200\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/items/274",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "items",
+                "274"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"test item2\",\r\n  \"price\": 200\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/items/11",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items",
+                    "11"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": {\r\n        \"id\": 11,\r\n        \"name\": \"test item2\",\r\n        \"price\": \"200.00\",\r\n        \"created_at\": \"2026-02-02T15:20:26.000000Z\",\r\n        \"updated_at\": \"2026-02-02T15:21:55.000000Z\"\r\n    },\r\n    \"message\": \"Item updated successfully\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "DeleteItem",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/items/274",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "items",
+                "274"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Delete",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items/12",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items",
+                    "12"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": null,\r\n    \"message\": \"Item deleted successfully\"\r\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "AllOrders",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders?status=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "status",
+                  "value": "1",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "All",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/orders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "2",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": [\r\n        {\r\n            \"id\": 3,\r\n            \"client_id\": 10,\r\n            \"status\": \"Pending\",\r\n            \"subtotal\": \"899.97\",\r\n            \"tax\": \"0.00\",\r\n            \"tax_type\": 1,\r\n            \"discount\": \"1.00\",\r\n            \"discount_type\": 1,\r\n            \"grand_total\": \"898.97\",\r\n            \"payments\": [],\r\n            \"created_at\": \"2026-02-02T15:47:48.000000Z\",\r\n            \"updated_at\": \"2026-02-02T15:47:48.000000Z\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"client_id\": 10,\r\n            \"status\": \"Pending\",\r\n            \"subtotal\": \"899.97\",\r\n            \"tax\": \"0.00\",\r\n            \"tax_type\": 1,\r\n            \"discount\": \"1.00\",\r\n            \"discount_type\": 1,\r\n            \"grand_total\": \"898.97\",\r\n            \"payments\": [],\r\n            \"created_at\": \"2026-02-02T15:48:27.000000Z\",\r\n            \"updated_at\": \"2026-02-02T15:48:27.000000Z\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"client_id\": 10,\r\n            \"status\": \"Confirmed\",\r\n            \"subtotal\": \"979.96\",\r\n            \"tax\": \"0.00\",\r\n            \"tax_type\": 1,\r\n            \"discount\": \"1.00\",\r\n            \"discount_type\": 1,\r\n            \"grand_total\": \"978.96\",\r\n            \"payments\": [\r\n                {\r\n                    \"id\": 1,\r\n                    \"order_id\": 5,\r\n                    \"gateway_id\": 1,\r\n                    \"status\": \"Successful\",\r\n                    \"amount\": \"978.96\",\r\n                    \"created_at\": \"2026-02-02T16:11:29.000000Z\",\r\n                    \"updated_at\": \"2026-02-02T16:11:29.000000Z\"\r\n                }\r\n            ],\r\n            \"created_at\": \"2026-02-02T15:50:27.000000Z\",\r\n            \"updated_at\": \"2026-02-02T16:11:29.000000Z\"\r\n        }\r\n    ],\r\n    \"meta\": {\r\n        \"current_page\": 1,\r\n        \"per_page\": 15,\r\n        \"number_of_items\": 3,\r\n        \"number_of_pages\": 1\r\n    },\r\n    \"message\": \"Data retrieved successfully\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "ShowOrder",
+          "protocolProfileBehavior": {
+            "disabledSystemHeaders": {}
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/105",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "105"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Show",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/orders/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "1"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": {\r\n        \"id\": 5,\r\n        \"client_id\": 10,\r\n        \"status\": \"Confirmed\",\r\n        \"subtotal\": \"979.96\",\r\n        \"tax\": \"0.00\",\r\n        \"tax_type\": 1,\r\n        \"discount\": \"1.00\",\r\n        \"discount_type\": 1,\r\n        \"grand_total\": \"978.96\",\r\n        \"payments\": [\r\n            {\r\n                \"id\": 1,\r\n                \"order_id\": 5,\r\n                \"gateway_id\": 1,\r\n                \"status\": \"Successful\",\r\n                \"amount\": \"978.96\",\r\n                \"created_at\": \"2026-02-02T16:11:29.000000Z\",\r\n                \"updated_at\": \"2026-02-02T16:11:29.000000Z\"\r\n            }\r\n        ],\r\n        \"created_at\": \"2026-02-02T15:50:27.000000Z\",\r\n        \"updated_at\": \"2026-02-02T16:11:29.000000Z\"\r\n    },\r\n    \"message\": \"Order retrieved successfully\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "CreateOrder",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "client_id",
+                  "value": "10",
+                  "description": "required|exists:clients,id",
+                  "type": "text",
+                  "uuid": "414369bb-3224-4bfb-89d9-65abafa5929a"
+                },
+                {
+                  "key": "items[0][item_id]",
+                  "value": "2",
+                  "description": "required|exists:items,id",
+                  "type": "text",
+                  "uuid": "2d54e02a-14b1-4666-8949-8cfc7624a986"
+                },
+                {
+                  "key": "items[0][qty]",
+                  "value": "3",
+                  "description": "required|integer|min:1",
+                  "type": "text",
+                  "uuid": "03e91d80-fa6b-45a8-88c0-c07baae11c0a"
+                },
+                {
+                  "key": "tax",
+                  "value": "0",
+                  "description": "sometimes|numeric|min:0|decimal:0,2",
+                  "type": "text",
+                  "uuid": "51e1cfcd-2e5d-4108-a187-5374363b9538"
+                },
+                {
+                  "key": "tax_type",
+                  "value": "1",
+                  "description": "sometimes|integer|in: taxes in config",
+                  "type": "text",
+                  "uuid": "e5960645-545b-4073-a376-7f148c7ed97a"
+                },
+                {
+                  "key": "discount",
+                  "value": "1",
+                  "description": "sometimes|numeric|min:0|decimal:0,2",
+                  "type": "text",
+                  "uuid": "8d6080e3-98b7-423a-b274-e53aeef387d1"
+                },
+                {
+                  "key": "discount_type",
+                  "value": "1",
+                  "description": "sometimes|integer|in: discounts in config",
+                  "type": "text",
+                  "uuid": "9d63f0ba-9a43-4208-afd3-d72638ed103f"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orders",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Create",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "client_id",
+                      "value": "10",
+                      "description": "required|exists:clients,id",
+                      "type": "text",
+                      "uuid": "414369bb-3224-4bfb-89d9-65abafa5929a"
+                    },
+                    {
+                      "key": "items[0][item_id]",
+                      "value": "2",
+                      "description": "required|exists:items,id",
+                      "type": "text",
+                      "uuid": "2d54e02a-14b1-4666-8949-8cfc7624a986"
+                    },
+                    {
+                      "key": "items[0][qty]",
+                      "value": "3",
+                      "description": "required|integer|min:1",
+                      "type": "text",
+                      "uuid": "03e91d80-fa6b-45a8-88c0-c07baae11c0a"
+                    },
+                    {
+                      "key": "tax",
+                      "value": "0",
+                      "description": "sometimes|numeric|min:0|decimal:0,2",
+                      "type": "text",
+                      "uuid": "51e1cfcd-2e5d-4108-a187-5374363b9538"
+                    },
+                    {
+                      "key": "tax_type",
+                      "value": "1",
+                      "description": "sometimes|integer|in: taxes in config",
+                      "type": "text",
+                      "uuid": "e5960645-545b-4073-a376-7f148c7ed97a"
+                    },
+                    {
+                      "key": "discount",
+                      "value": "1",
+                      "description": "sometimes|numeric|min:0|decimal:0,2",
+                      "type": "text",
+                      "uuid": "8d6080e3-98b7-423a-b274-e53aeef387d1"
+                    },
+                    {
+                      "key": "discount_type",
+                      "value": "1",
+                      "description": "sometimes|integer|in: discounts in config",
+                      "type": "text",
+                      "uuid": "9d63f0ba-9a43-4208-afd3-d72638ed103f"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/orders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": {\r\n        \"id\": 5,\r\n        \"client_id\": \"10\",\r\n        \"status\": \"Pending\",\r\n        \"subtotal\": \"899.97\",\r\n        \"tax\": \"0.00\",\r\n        \"tax_type\": 1,\r\n        \"discount\": \"1.00\",\r\n        \"discount_type\": 1,\r\n        \"grand_total\": \"898.97\",\r\n        \"order_details\": [\r\n            {\r\n                \"id\": 3,\r\n                \"item_id\": 2,\r\n                \"item_name\": \"Monitor\",\r\n                \"price\": \"299.99\",\r\n                \"qty\": 3,\r\n                \"total\": \"899.97\"\r\n            }\r\n        ],\r\n        \"payments\": [],\r\n        \"created_at\": \"2026-02-02T15:50:27.000000Z\",\r\n        \"updated_at\": \"2026-02-02T15:50:27.000000Z\"\r\n    },\r\n    \"message\": \"Order created successfully\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "UpdateOrder",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"client_id\": \"10\",\r\n  \"items\": [\r\n    {\r\n      \"item_id\": \"2\",\r\n      \"qty\": 3\r\n    }\r\n    ,\r\n\r\n    {\r\n      \"item_id\": \"3\",\r\n      \"qty\": 1\r\n    }\r\n  ],\r\n  \"tax\": \"0\",\r\n  \"tax_type\": 1,\r\n  \"discount\": \"1\",\r\n  \"discount_type\": 1\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/105",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "105"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"client_id\": \"10\",\r\n  \"items\": [\r\n    {\r\n      \"item_id\": \"2\",\r\n      \"qty\": 3\r\n    }\r\n    ,\r\n\r\n    {\r\n      \"item_id\": \"3\",\r\n      \"qty\": 1\r\n    }\r\n  ],\r\n  \"tax\": \"0\",\r\n  \"tax_type\": 1,\r\n  \"discount\": \"1\",\r\n  \"discount_type\": 1\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/orders/5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "5"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": {\r\n        \"id\": 5,\r\n        \"client_id\": \"10\",\r\n        \"status\": \"Pending\",\r\n        \"subtotal\": \"979.96\",\r\n        \"tax\": \"0.00\",\r\n        \"tax_type\": 1,\r\n        \"discount\": \"1.00\",\r\n        \"discount_type\": 1,\r\n        \"grand_total\": \"978.96\",\r\n        \"order_details\": [\r\n            {\r\n                \"id\": 4,\r\n                \"item_id\": 2,\r\n                \"item_name\": \"Monitor\",\r\n                \"price\": \"299.99\",\r\n                \"qty\": 3,\r\n                \"total\": \"899.97\"\r\n            },\r\n            {\r\n                \"id\": 5,\r\n                \"item_id\": 3,\r\n                \"item_name\": \"Keyboard\",\r\n                \"price\": \"79.99\",\r\n                \"qty\": 1,\r\n                \"total\": \"79.99\"\r\n            }\r\n        ],\r\n        \"payments\": [],\r\n        \"created_at\": \"2026-02-02T15:50:27.000000Z\",\r\n        \"updated_at\": \"2026-02-02T15:55:35.000000Z\"\r\n    },\r\n    \"message\": \"Order updated successfully\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "PayOrder",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "payment_gateway_id",
+                  "value": "1",
+                  "description": "required|exists:payment_gateways,id",
+                  "type": "text",
+                  "uuid": "8782b9c5-e9dc-47b7-914b-c9c8ff882c26"
+                },
+                {
+                  "key": "amount",
+                  "value": "978.96",
+                  "description": "required|numeric|min:0.01|decimal:0,2",
+                  "type": "text",
+                  "uuid": "e18ad622-4e81-4aea-9f33-202445f07d83"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/105/pay",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "105",
+                "pay"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "PayOrder",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "payment_gateway_id",
+                      "value": "1",
+                      "description": "required|exists:payment_gateways,id",
+                      "type": "text",
+                      "uuid": "8782b9c5-e9dc-47b7-914b-c9c8ff882c26"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "978.96",
+                      "description": "required|numeric|min:0.01|decimal:0,2",
+                      "type": "text",
+                      "uuid": "e18ad622-4e81-4aea-9f33-202445f07d83"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/orders/5/pay",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "5",
+                    "pay"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": {\r\n        \"id\": 5,\r\n        \"client_id\": 10,\r\n        \"status\": \"Confirmed\",\r\n        \"subtotal\": \"979.96\",\r\n        \"tax\": \"0.00\",\r\n        \"tax_type\": 1,\r\n        \"discount\": \"1.00\",\r\n        \"discount_type\": 1,\r\n        \"grand_total\": \"978.96\",\r\n        \"payments\": [\r\n            {\r\n                \"id\": 1,\r\n                \"order_id\": 5,\r\n                \"gateway_id\": 1,\r\n                \"status\": \"Successful\",\r\n                \"amount\": \"978.96\",\r\n                \"created_at\": \"2026-02-02T16:11:29.000000Z\",\r\n                \"updated_at\": \"2026-02-02T16:11:29.000000Z\"\r\n            }\r\n        ],\r\n        \"created_at\": \"2026-02-02T15:50:27.000000Z\",\r\n        \"updated_at\": \"2026-02-02T16:11:29.000000Z\"\r\n    },\r\n    \"message\": \"Order payment processed successfully\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "DeleteOrder",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/105",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "105"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Delete",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/orders/5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "5"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "// when associated payments\r\n{\r\n    \"success\": false,\r\n    \"errors\": {\r\n        \"message\": \"Cannot delete order with associated payments\"\r\n    }\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "ChangeOrderStatus",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "status",
+                  "value": "2",
+                  "description": "gets from orderStatus config",
+                  "type": "text",
+                  "uuid": "3cf88262-7243-4ac1-9111-0dfac417946e"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/105/change-status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "105",
+                "change-status"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "ChangeOrderStatus",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "status",
+                      "value": "2",
+                      "description": "gets from orderStatus config",
+                      "type": "text",
+                      "uuid": "3cf88262-7243-4ac1-9111-0dfac417946e"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/orders/3/change-status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "3",
+                    "change-status"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": {\r\n        \"id\": 3,\r\n        \"client_id\": 10,\r\n        \"status\": \"Confirmed\",\r\n        \"subtotal\": \"899.97\",\r\n        \"tax\": \"0.00\",\r\n        \"tax_type\": 1,\r\n        \"discount\": \"1.00\",\r\n        \"discount_type\": 1,\r\n        \"grand_total\": \"898.97\",\r\n        \"payments\": [\r\n            {\r\n                \"id\": 2,\r\n                \"order_id\": 3,\r\n                \"gateway_id\": 1,\r\n                \"status\": \"Successful\",\r\n                \"amount\": \"898.97\",\r\n                \"created_at\": \"2026-02-02T16:47:56.000000Z\",\r\n                \"updated_at\": \"2026-02-02T16:47:56.000000Z\"\r\n            }\r\n        ],\r\n        \"created_at\": \"2026-02-02T15:47:48.000000Z\",\r\n        \"updated_at\": \"2026-02-02T16:47:24.000000Z\"\r\n    },\r\n    \"message\": \"Order status updated successfully\"\r\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Gateways",
+      "item": [
+        {
+          "name": "AllGateways",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/gateways",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "gateways"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "All",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/gateways",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "gateways"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"Credit Card\",\r\n            \"handler_key\": \"credit_card\",\r\n            \"handler_class\": \"App\\\\Services\\\\Gateways\\\\CreditCardGateway\",\r\n            \"active\": true,\r\n            \"client_id\": \"credit_card_client_id\",\r\n            \"secret_key\": \"credit_card_secret_key\",\r\n            \"created_at\": \"2026-02-02T12:38:20.000000Z\",\r\n            \"updated_at\": \"2026-02-02T12:38:20.000000Z\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"name\": \"PayPal\",\r\n            \"handler_key\": \"paypal\",\r\n            \"handler_class\": \"App\\\\Services\\\\Gateways\\\\PayPalGateway\",\r\n            \"active\": true,\r\n            \"client_id\": \"paypal_client_id\",\r\n            \"secret_key\": \"paypal_secret_key\",\r\n            \"created_at\": \"2026-02-02T12:38:20.000000Z\",\r\n            \"updated_at\": \"2026-02-02T12:38:20.000000Z\"\r\n        }\r\n    ],\r\n    \"meta\": {\r\n        \"current_page\": 1,\r\n        \"per_page\": 15,\r\n        \"number_of_items\": 2,\r\n        \"number_of_pages\": 1\r\n    },\r\n    \"message\": \"Data retrieved successfully\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "ShowGateway",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/gateways/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "gateways",
+                "1"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Show",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/gateways/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "gateways",
+                    "1"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": {\r\n        \"id\": 1,\r\n        \"name\": \"Credit Card\",\r\n        \"handler_key\": \"credit_card\",\r\n        \"handler_class\": \"App\\\\Services\\\\Gateways\\\\CreditCardGateway\",\r\n        \"active\": true,\r\n        \"client_id\": \"credit_card_client_id\",\r\n        \"secret_key\": \"credit_card_secret_key\",\r\n        \"created_at\": \"2026-02-02T12:38:20.000000Z\",\r\n        \"updated_at\": \"2026-02-02T12:38:20.000000Z\"\r\n    },\r\n    \"message\": \"Gateway retrieved successfully\"\r\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "AllPayments",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/payments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "payments"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "All",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/payments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "payments"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"order_id\": 5,\r\n            \"gateway_id\": 1,\r\n            \"status\": \"Successful\",\r\n            \"amount\": \"978.96\",\r\n            \"gateway\": {\r\n                \"id\": 1,\r\n                \"name\": \"Credit Card\",\r\n                \"handler_key\": \"credit_card\",\r\n                \"handler_class\": \"App\\\\Services\\\\Gateways\\\\CreditCardGateway\",\r\n                \"active\": true,\r\n                \"client_id\": \"credit_card_client_id\",\r\n                \"secret_key\": \"credit_card_secret_key\",\r\n                \"created_at\": \"2026-02-02T12:38:20.000000Z\",\r\n                \"updated_at\": \"2026-02-02T12:38:20.000000Z\"\r\n            },\r\n            \"created_at\": \"2026-02-02T16:11:29.000000Z\",\r\n            \"updated_at\": \"2026-02-02T16:11:29.000000Z\"\r\n        }\r\n    ],\r\n    \"message\": \"Payments retrieved successfully\"\r\n}"
+            },
+            {
+              "name": "AllByOrder",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/payments?order_id=5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "payments"
+                  ],
+                  "query": [
+                    {
+                      "key": "order_id",
+                      "value": "5"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"order_id\": 5,\r\n            \"gateway_id\": 1,\r\n            \"status\": \"Successful\",\r\n            \"amount\": \"978.96\",\r\n            \"gateway\": {\r\n                \"id\": 1,\r\n                \"name\": \"Credit Card\",\r\n                \"handler_key\": \"credit_card\",\r\n                \"handler_class\": \"App\\\\Services\\\\Gateways\\\\CreditCardGateway\",\r\n                \"active\": true,\r\n                \"client_id\": \"credit_card_client_id\",\r\n                \"secret_key\": \"credit_card_secret_key\",\r\n                \"created_at\": \"2026-02-02T12:38:20.000000Z\",\r\n                \"updated_at\": \"2026-02-02T12:38:20.000000Z\"\r\n            },\r\n            \"created_at\": \"2026-02-02T16:11:29.000000Z\",\r\n            \"updated_at\": \"2026-02-02T16:11:29.000000Z\"\r\n        }\r\n    ],\r\n    \"message\": \"Payments retrieved successfully\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "ShowPayment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/payments/39",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "39"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Show",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/payments/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "payments",
+                    "1"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": {\r\n        \"id\": 1,\r\n        \"order_id\": 5,\r\n        \"gateway_id\": 1,\r\n        \"status\": \"Successful\",\r\n        \"amount\": \"978.96\",\r\n        \"gateway\": {\r\n            \"id\": 1,\r\n            \"name\": \"Credit Card\",\r\n            \"handler_key\": \"credit_card\",\r\n            \"handler_class\": \"App\\\\Services\\\\Gateways\\\\CreditCardGateway\",\r\n            \"active\": true,\r\n            \"client_id\": \"credit_card_client_id\",\r\n            \"secret_key\": \"credit_card_secret_key\",\r\n            \"created_at\": \"2026-02-02T12:38:20.000000Z\",\r\n            \"updated_at\": \"2026-02-02T12:38:20.000000Z\"\r\n        },\r\n        \"created_at\": \"2026-02-02T16:11:29.000000Z\",\r\n        \"updated_at\": \"2026-02-02T16:11:29.000000Z\"\r\n    },\r\n    \"message\": \"Payment retrieved successfully\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "PaymentsByOrder",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/payments/order/105",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "order",
+                "105"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "PaymentsByOrder",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/payments/order/5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "payments",
+                    "order",
+                    "5"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"order_id\": 5,\r\n            \"gateway_id\": 1,\r\n            \"status\": \"Successful\",\r\n            \"amount\": \"978.96\",\r\n            \"created_at\": \"2026-02-02T16:11:29.000000Z\",\r\n            \"updated_at\": \"2026-02-02T16:11:29.000000Z\"\r\n        }\r\n    ],\r\n    \"message\": \"Payments for order retrieved successfully\"\r\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Config",
+      "item": [
+        {
+          "name": "TaxTypes",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/configuration/tax-types",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "configuration",
+                "tax-types"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "TaxTypes",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/configuration/tax-types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "configuration",
+                    "tax-types"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": [\r\n        {\r\n            \"key\": \"Fixed\",\r\n            \"value\": 1\r\n        },\r\n        {\r\n            \"key\": \"Percent\",\r\n            \"value\": 2\r\n        }\r\n    ],\r\n    \"message\": \"Tax types retrieved successfully\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "DiscountTypes",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/configuration/discount-types",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "configuration",
+                "discount-types"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "DiscountTypes",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/configuration/discount-types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "configuration",
+                    "discount-types"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n    \"success\": true,\r\n    \"data\": [\r\n        {\r\n            \"key\": \"Fixed\",\r\n            \"value\": 1\r\n        },\r\n        {\r\n            \"key\": \"Percent\",\r\n            \"value\": 2\r\n        }\r\n    ],\r\n    \"message\": \"Discount types retrieved successfully\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "OrderStatus",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/configuration/order-status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "configuration",
+                "order-status"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "OrderStatus",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/configuration/order-status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "configuration",
+                    "order-status"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"key\": \"Pending\",\n            \"value\": 1\n        },\n        {\n            \"key\": \"Confirmed\",\n            \"value\": 2\n        },\n        {\n            \"key\": \"Cancelled\",\n            \"value\": 3\n        }\n    ],\n    \"message\": \"Order statuses retrieved successfully\"\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "json_web_token_0qwc",
+      "value": ""
+    },
+    {
+      "key": "json_web_token_0m91",
+      "value": ""
+    },
+    {
+      "key": "baseUrl",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
